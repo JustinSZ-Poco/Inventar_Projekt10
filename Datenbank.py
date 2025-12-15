@@ -9,3 +9,11 @@ def get_connection():
         password='kdm25',
         database='kdm25_sql_uebung'
     )
+
+
+conn = get_connection()
+cursor = conn.cursor(dictionary=True)
+
+sql = 'SELECT id, name, kategorie FROM t_einkaufsliste'
+cursor.execute(sql)
+rows = cursor.fetchall()
