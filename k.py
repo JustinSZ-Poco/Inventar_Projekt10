@@ -1,2 +1,0 @@
-Igel = "Thorsten"
-Maus = "Agjsd"
