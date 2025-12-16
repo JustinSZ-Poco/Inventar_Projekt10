@@ -6,17 +6,20 @@ ctk.set_default_color_theme("dark-blue")
 
 RICHTIGER_PIN = "1234"
 
+def zeige_inventar_bearbeiten_seite():
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    ctk.CTkButton(master=root, text="Zurück zur Hauptseite", command=zeige_hauptanwendung).pack(pady=30)
+
 def bearbeiten_aktion():
-    print("Bearbeiten-Button geklickt!")
-    main_app_label.configure(text="Bearbeitungsmodus aktiv!")
+    zeige_inventar_bearbeiten_seite()
 
 def loeschen_aktion():
     print("Löschen-Button geklickt!")
-    main_app_label.configure(text="Löschmodus aktiv!")
 
 def hinzufuegen_aktion():
     print("Hinzufügen-Button geklickt!")
-    main_app_label.configure(text="Hinzufügemodus aktiv!")
 
 def zeige_hauptanwendung():
     for widget in root.winfo_children():
