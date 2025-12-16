@@ -12,14 +12,25 @@ def zeige_inventar_bearbeiten_seite():
 
     ctk.CTkButton(master=root, text="Zurück zur Hauptseite", command=zeige_hauptanwendung).pack(pady=30)
 
+def zeige_inventar_loeschen_seite():
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    ctk.CTkButton(master=root, text="Zurück zur Hauptseite", command=zeige_hauptanwendung).pack(pady=30)
+
+def zeige_inventar_hinzufuegen_seite():
+        for widget in root.winfo_children():
+            widget.destroy()
+
+        ctk.CTkButton(master=root, text="Zurück zur Hauptseite", command=zeige_hauptanwendung).pack(pady=30)
 def bearbeiten_aktion():
     zeige_inventar_bearbeiten_seite()
 
 def loeschen_aktion():
-    print("Löschen-Button geklickt!")
+    zeige_inventar_loeschen_seite()
 
 def hinzufuegen_aktion():
-    print("Hinzufügen-Button geklickt!")
+    zeige_inventar_hinzufuegen_seite()
 
 def zeige_hauptanwendung():
     for widget in root.winfo_children():
