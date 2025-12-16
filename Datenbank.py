@@ -10,7 +10,7 @@ def get_connection():
         database='kdm25_sql_uebung'
     )
 
-def main():
+def Inventar_sehen():
     try:
         conn = get_connection()
         cursor = conn.cursor(dictionary=True)
@@ -44,4 +44,6 @@ def main():
             pass
 
 if __name__ == "__main__":
-    main()
+    Inventar_sehen()
+
+
