@@ -29,7 +29,7 @@ def Inventar_sehen():
 
         # Zeilen ausgeben
         for row in rows:
-            print(f"{row['id']} | {row['name']} | {row['kategorie']} | {row['standort']} | {row['status']}")
+             print(f"{row['id']} | {row['name']} | {row['kategorie']} | {row['standort']} | {row['status']}")
 
     except mysql.connector.Error as err:
         print(f"Datenbankfehler: {err}")
@@ -46,4 +46,4 @@ def Inventar_sehen():
 if __name__ == "__main__":
     Inventar_sehen()
 
-
+print()
