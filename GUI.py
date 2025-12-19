@@ -11,12 +11,10 @@ ctk.set_default_color_theme("dark-blue")
 
 RICHTIGER_PIN = "1234"
 
-# >>> WICHTIG: root früh erzeugen (fix für "Unresolved reference 'root'")
 root = ctk.CTk(fg_color="yellow")
 root.title('Poco_Inventar - Login')
-root.geometry('1000x600')  # Mehr Platz für die Inventaranzeige
+root.geometry('1000x600')
 
-# --- Datenbankfunktionen ---
 def get_connection():
     return mysql.connector.connect(
         host='tramspotters.ddnss.de',
@@ -119,7 +117,6 @@ def update_inventar(inventar_id, name, kategorie, standort, status):
             conn.close()
 
 def delete_inventar(inventar_id):
-    """Löscht einen Datensatz; gibt die Anzahl betroffener Zeilen zurück (0 = nicht gefunden)."""
     if not isinstance(inventar_id, int) or inventar_id <= 0:
         raise ValueError("ID muss eine positive ganze Zahl sein.")
 
@@ -140,7 +137,6 @@ def delete_inventar(inventar_id):
         if conn and conn.is_connected():
             conn.close()
 
-# --- GUI Hilfsfunktion ---
 def clear_root():
     for widget in root.winfo_children():
         widget.destroy()
@@ -353,7 +349,6 @@ def zeige_hauptanwendung():
     ctk.CTkButton(master=root, text="Inventar bearbeiten", command=bearbeiten_aktion).pack(pady=10)
     ctk.CTkButton(master=root, text="Inventar löschen", command=loeschen_aktion).pack(pady=10)
 
-# --- Login-Logik ---
 def beim_klicken_passiert_das():
     eingegebener_pin = pin_eingabe.get()
 
@@ -363,7 +358,6 @@ def beim_klicken_passiert_das():
         mymy_label.configure(text="Falscher PIN! Bitte erneut versuchen.")
         pin_eingabe.delete(0, ctk.END)
 
-# --- Login-Start-Widgets ---
 mymy_label = ctk.CTkLabel(master=root, text="Bitte PIN eingeben:", font=("Arial", 20))
 mymy_label.pack(pady=20)
 
@@ -372,8 +366,5 @@ pin_eingabe.pack(pady=10)
 
 my_button = ctk.CTkButton(master=root, text="Anmelden", command=beim_klicken_passiert_das)
 my_button.pack(pady=20)
-
-
-# --- App starten ---
 
 root.mainloop()
