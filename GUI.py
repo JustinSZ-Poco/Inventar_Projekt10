@@ -1,5 +1,5 @@
 
-# -*- coding: utf-8 -*-
+#Import für die Module
 import tkinter as tk
 from tkinter import messagebox
 import customtkinter as ctk
@@ -9,12 +9,15 @@ import mysql.connector  # Importiere das MySQL-Konnektor-Modul
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
 
+#Passwort
 RICHTIGER_PIN = "1234"
 
+#Einstellung für den Haupt screen
 root = ctk.CTk(fg_color="yellow")
 root.title('Poco_Inventar - Login')
 root.geometry('1000x600')
 
+#Verbindung zur SQL Liste
 def get_connection():
     return mysql.connector.connect(
         host='tramspotters.ddnss.de',
@@ -151,6 +154,7 @@ def zeige_inventar_anzeige_seite():
     ctk.CTkButton(top_bar, text="Aktualisieren", command=zeige_inventar_anzeige_seite).pack(side="left", padx=5, pady=10)
     ctk.CTkButton(top_bar, text="Hinzufügen", command=zeige_inventar_hinzufuegen_seite).pack(side="left", padx=5, pady=10)
     ctk.CTkButton(top_bar, text="Zurück zur Hauptseite", command=zeige_hauptanwendung).pack(side="right", padx=5, pady=10)
+    #Das sind die Buttons für die Inventar anzeigen Seite.
 
     inventar_daten = get_inventar_daten()
 
@@ -329,7 +333,7 @@ def loesche_eintrag_mit_bestaetigung(inventar_id):
         except mysql.connector.Error as err:
             messagebox.showerror("Datenbankfehler", str(err))
 
-# --- Aktionen für Buttons der Hauptanwendung ---
+#Aktionen für Buttons der Hauptanwendung
 def bearbeiten_aktion():
     zeige_inventar_bearbeiten_seite()
 
@@ -339,31 +343,36 @@ def loeschen_aktion():
 def hinzufuegen_aktion():
     zeige_inventar_hinzufuegen_seite()
 
+#Funktion zur GUI der Hauptanwendung
 def zeige_hauptanwendung():
     clear_root()
 
-    ctk.CTkLabel(master=root, text="Willkommen im Poco Inventar!", font=("Arial", 24)).pack(pady=30)
+    ctk.CTkLabel(master=root, text="Willkommen im Poco Inventar!", font=("Arial", 24)).pack(pady=30)         #Haupt-Text anzeige
 
-    ctk.CTkButton(master=root, text="Inventar anzeigen", command=zeige_inventar_anzeige_seite).pack(pady=10)
-    ctk.CTkButton(master=root, text="Inventar hinzufügen", command=hinzufuegen_aktion).pack(pady=10)
-    ctk.CTkButton(master=root, text="Inventar bearbeiten", command=bearbeiten_aktion).pack(pady=10)
-    ctk.CTkButton(master=root, text="Inventar löschen", command=loeschen_aktion).pack(pady=10)
+    ctk.CTkButton(master=root, text="Inventar anzeigen", command=zeige_inventar_anzeige_seite).pack(pady=10) #Button zum anzeigen des Inventars
+    ctk.CTkButton(master=root, text="Inventar hinzufügen", command=hinzufuegen_aktion).pack(pady=10)         #Button zum hinzufügen im Inventar
+    ctk.CTkButton(master=root, text="Inventar bearbeiten", command=bearbeiten_aktion).pack(pady=10)          #Button zum bearbeiten des Inventars
+    ctk.CTkButton(master=root, text="Inventar löschen", command=loeschen_aktion).pack(pady=10)               #Button zum löschen im Inventar
 
+#Funktion zum überprüfen des PINs
 def beim_klicken_passiert_das():
     eingegebener_pin = pin_eingabe.get()
 
-    if eingegebener_pin == RICHTIGER_PIN:
+    if eingegebener_pin == RICHTIGER_PIN: #bei richtigem PIN wird die Hauptanwendung gezeit
         zeige_hauptanwendung()
     else:
-        mymy_label.configure(text="Falscher PIN! Bitte erneut versuchen.")
+        mymy_label.configure(text="Falscher PIN! Bitte erneut versuchen.") #bei falschem PIN wird der Text Falscher PIN angezeigt und man bleibt bei der Anmeldung
         pin_eingabe.delete(0, ctk.END)
 
+#Tafel die Bitte PIN eingeben abfragt
 mymy_label = ctk.CTkLabel(master=root, text="Bitte PIN eingeben:", font=("Arial", 20))
 mymy_label.pack(pady=20)
 
+#Textfeld wo der PIN eingegeben werden soll
 pin_eingabe = ctk.CTkEntry(master=root, placeholder_text="PIN", width=200, show="*")
 pin_eingabe.pack(pady=10)
 
+#Button um die Anmeldung durchzuführen
 my_button = ctk.CTkButton(master=root, text="Anmelden", command=beim_klicken_passiert_das)
 my_button.pack(pady=20)
 
